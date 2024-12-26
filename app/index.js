@@ -2,9 +2,9 @@ import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { View } from 'react-native';
 import Main from './components/Main';
-import "./global.css";
+import "../global.css";
 
-export default function App() {
+export default function Page() {
 
   return (
     <SafeAreaProvider>

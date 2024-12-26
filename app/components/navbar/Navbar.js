@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image } from 'react-native';
-import menu from "../../assets/menu-svgrepo-com.png";
+import menu from "../../../assets/menu-svgrepo-com.png";
 
 const Navbar = () => {
   return (

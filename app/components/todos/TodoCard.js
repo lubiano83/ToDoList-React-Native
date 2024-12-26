@@ -1,14 +1,14 @@
 import { Text, View, Image, Pressable } from "react-native";
-import cross from "../../assets/cross-svgrepo-com.png";
-import check from "../../assets/check-svgrepo-com.png";
-import { useCapitalize } from "../../hooks/useCapitalize.js";
+import cross from "../../../assets/cross-svgrepo-com.png";
+import check from "../../../assets/check-svgrepo-com.png";
+import useCapitalize from "../../hooks/useCapitalize"
 
 const TodoCard = ({ item }) => {
 
     const { capitalize } = useCapitalize();
 
     return (
-        <Pressable className="mt-4 border-2 border-black rounded-xl p-2 flex-row justify-between items-center bg-white">
+        <Pressable className="mt-4 border-2 border-black rounded-xl p-2 flex-row justify-between items-center bg-white shadow-black shadow-sm">
             {/* Sección izquierda */}
             <View className="gap-1 pr-2 flex-1">
                 <Text numberOfLines={1} ellipsizeMode="tail">
