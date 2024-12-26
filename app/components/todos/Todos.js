@@ -27,11 +27,11 @@ const Todos = () => {
     }, []);
 
     return (
-        <View className="justify-center items-center w-full px-4 h-full">
+        <View className="justify-center items-center w-full px-4 h-full pt-4">
             { todos.length === 0 ? ( 
                 <ActivityIndicator size="large" color={"black"} />
             ) : (
-                <>
+                <View className="items-center">
                     <Title>Todas las Tareas:</Title>
                     <FlatList
                         className="w-full"
@@ -39,7 +39,7 @@ const Todos = () => {
                         keyExtractor={(item, index) => index.toString()}
                         renderItem={({ item }) => <TodoCard item={item} /> }
                     />
-                </> 
+                </View> 
             )}
         </View>
     )

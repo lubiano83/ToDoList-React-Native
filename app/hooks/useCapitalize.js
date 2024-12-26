@@ -1,12 +1,18 @@
 const useCapitalize = () => {
-  const capitalize = (string) => {
-    if (typeof string === "string" && string.length > 0) {
-      return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-    return ""; // Devuelve una cadena vacía si no es válida
-  };
 
-  return { capitalize };
+  try {
+    const capitalize = (string) => {
+      if (string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+      }
+      return '';
+    };
+
+    return { capitalize };
+    
+  } catch (error) {
+    console.log("useCapitalize", error.message);
+  }
 };
 
 export default useCapitalize;

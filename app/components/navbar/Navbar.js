@@ -1,11 +1,12 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import menu from "../../../assets/menu-svgrepo-com.png";
+import Logo from '../Logo';
 
 const Navbar = () => {
   return (
     <View className="bg-black w-full p-4 flex-row justify-between">
-      <Text className="text-white text-xl font-bold">ToDoList</Text>
+      <Logo />
       <Image  source={menu} style={{ height: 30, width: 30 }} />
     </View>
   );

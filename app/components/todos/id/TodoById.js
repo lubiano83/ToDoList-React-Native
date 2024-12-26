@@ -1,8 +1,9 @@
 import { View, FlatList, ActivityIndicator } from "react-native";
 import { useEffect, useState } from "react";
 import Title from "../../Title";
+import ByIdCard from "./ByIdCard";
 
-const ToDoById = ({ id = 1 }) => {
+const ToDoById = ({ id }) => {
 
     const [todos, setTodos] = useState([]);
 
@@ -26,19 +27,19 @@ const ToDoById = ({ id = 1 }) => {
     }, []);
 
     return (
-        <View className="justify-center items-center w-full px-4 h-full">
+        <View className="justify-center items-center w-full px-4 h-full pt-4">
             { todos.length === 0 ? ( 
                 <ActivityIndicator size="large" color={"black"} />
             ) : (
-                <>
+                <View className="items-center w-full h-full">
                     <Title>Detalle:</Title>
                     <FlatList
-                        className="w-full"
+                        className="w-full h-full"
                         data={todos}
                         keyExtractor={(item, index) => index.toString()}
-                        renderItem={({ item }) => <TodoCard item={item} /> }
+                        renderItem={({ item }) => <ByIdCard item={item} /> }
                     />
-                </> 
+                </View>
             )}
         </View>
     )
