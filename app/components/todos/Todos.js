@@ -3,7 +3,7 @@ import { FlatList, View, ActivityIndicator } from "react-native";
 import TodoCard from "./TodoCard";
 import Title from "../Title";
 
-const Todos = () => {
+export default function Todos() {
 
     const [todos, setTodos] = useState([]);
 
@@ -44,5 +44,3 @@ const Todos = () => {
         </View>
     )
 };
-
-export default Todos;

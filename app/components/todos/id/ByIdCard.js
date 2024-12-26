@@ -23,23 +23,23 @@ export default function ByIdCard({ item }) {
                 </View>
                 <View className="flex-row">
                     <Text className="text-black font-bold text-lg">Entrega:</Text>
-                    <Text className="text-lg text-black"> { item.dueDate }</Text>
+                    <Text className="text-lg text-black"> { item.dueDate } </Text>
                 </View>
                 <View className="flex-row">
                     <Text className="text-black text-lg font-bold">Creada:</Text>
-                    <Text className="text-lg text-black"> { item.createdAt }</Text>
+                    <Text className="text-lg text-black"> { item.createdAt } </Text>
                 </View>
                 <View className="flex-row">
                     <Text className="text-black text-lg font-bold">Terminada:</Text>
-                    <Text className="text-lg text-black"> { item.completed ? "Si" : "No" }</Text>
+                    <Text className="text-lg text-black"> { item.completed ? "Si" : "No" } </Text>
                 </View>
                 <View className="flex-row">
                     <Text className="text-black text-lg font-bold">Prioridad:</Text>
-                    <Text className="text-lg text-black"> { item.priority === "hight" ? "Alta" : item.priority === "medium" ? "Media" : item.priority === "low" ? "Baja" : "" }</Text>
+                    <Text className="text-lg text-black"> { item.priority === "high" ? "Alta" : item.priority === "medium" ? "Media" : item.priority === "low" ? "Baja" : "" } </Text>
                 </View>
                 <View className="flex-row">
                     <Text className="text-black text-lg font-bold">Descripcion:</Text>
-                    <Text className="text-lg text-black"> { item.description ? capitalize(item.description) : "Sin descripción.." }</Text>
+                    <Text className="text-lg text-black"> { item.description ? capitalize(item.description) : "Sin descripción.." } </Text>
                 </View>
             </View>
             <View className="mt-4">

@@ -1,4 +1,4 @@
-const useCapitalize = () => {
+export default function useCapitalize() {
 
   try {
     const capitalize = (string) => {
@@ -14,5 +14,3 @@ const useCapitalize = () => {
     console.log("useCapitalize", error.message);
   }
 };
-
-export default useCapitalize;

@@ -3,7 +3,7 @@ import { View, Image } from 'react-native';
 import menu from "../../../assets/menu-svgrepo-com.png";
 import Logo from '../Logo';
 
-const Navbar = () => {
+export default function Navbar() {
   return (
     <View className="bg-black w-full p-4 flex-row justify-between">
       <Logo />
@@ -11,5 +11,3 @@ const Navbar = () => {
     </View>
   );
 };
-
-export default Navbar;

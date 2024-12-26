@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Title from "../../Title";
 import ByIdCard from "./ByIdCard";
 
-const ToDoById = ({ id }) => {
+export default function ToDoById({ id }) {
 
     const [todos, setTodos] = useState([]);
 
@@ -44,5 +44,3 @@ const ToDoById = ({ id }) => {
         </View>
     )
 };
-
-export default ToDoById;
