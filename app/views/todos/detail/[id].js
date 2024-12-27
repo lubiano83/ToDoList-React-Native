@@ -1,5 +1,5 @@
 import { useLocalSearchParams } from "expo-router";
-import ToDoById from "../../components/todos/id/TodoById";
+import ToDoById from "../../../components/todos/detail/TodoById";
 
 export default function ByIdView() {
 

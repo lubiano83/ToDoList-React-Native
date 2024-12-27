@@ -31,7 +31,7 @@ export default function ToDoById({ id }) {
             { todos.length === 0 ? ( 
                 <ActivityIndicator size="large" color={"black"} />
             ) : (
-                <View className="items-center w-full h-full">
+                <View className="items-center w-full h-full gap-4">
                     <Title>Detalle:</Title>
                     <FlatList
                         className="w-full h-full"

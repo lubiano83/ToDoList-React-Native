@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
-import { FlatList, View, ActivityIndicator } from "react-native";
+import { FlatList, View, ActivityIndicator, Pressable, Text } from "react-native";
 import TodoCard from "./TodoCard";
 import Title from "../Title";
+import { Link } from "expo-router";
 
 export default function Todos() {
 
@@ -27,12 +28,14 @@ export default function Todos() {
     }, []);
 
     return (
-        <View className="justify-center items-center w-full px-4 h-full pt-4">
+        <View className="justify-center items-center w-full px-4 h-full pb-5">
             { todos.length === 0 ? ( 
                 <ActivityIndicator size="large" color={"black"} />
             ) : (
-                <View className="items-center">
-                    <Title>Todas las Tareas:</Title>
+                <View className="items-center pt-8">
+                    <View className="p-4">
+                        <Title>Todas las Tareas:</Title>
+                    </View>
                     <FlatList
                         className="w-full"
                         data={todos}
@@ -41,6 +44,13 @@ export default function Todos() {
                     />
                 </View> 
             )}
+            <View className="w-full py-4">
+                <Link href="/views/todos/create/about" asChild>
+                    <Pressable className="border-2 border-black bg-black w-full rounded-lg justify-center items-center">
+                        <Text className="text-white font-bold text-xl">Crear Tarea</Text>
+                    </Pressable>
+                </Link>
+            </View>
         </View>
     )
 };

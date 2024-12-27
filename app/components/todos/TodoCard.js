@@ -9,7 +9,7 @@ export default function TodoCard({ item }) {
     const { capitalize } = useCapitalize();
 
     return (
-        <Link href={`/views/todos/${item._id}`} className="mt-4 border-2 border-black rounded-xl p-2 flex justify-between items-center bg-black shadow-black shadow-sm">
+        <Link href={`/views/todos/detail/${item._id}`} className="border-2 mb-4 border-black rounded-xl p-2 flex justify-between items-center bg-black shadow-black shadow-sm">
            <View className="flex-row justify-center items-center">
                 <View className="gap-1 pr-2 flex-1">
                     <View className="flex-row">
@@ -27,9 +27,9 @@ export default function TodoCard({ item }) {
                     <Text className="text-white font-bold"> {item.dueDate} </Text>
                     <Text className="text-white font-bold"> {capitalize(item.priority)} </Text>
                     {item.completed ? (
-                        <Entypo name="circle-with-cross" size={20} color="red" />
+                         <FontAwesome name="check-circle" size={20} color="green" />
                     ) : (
-                        <FontAwesome name="check-circle" size={20} color="green" />
+                        <Entypo name="circle-with-cross" size={20} color="red" />
                     )}
                 </View>
             </View>
