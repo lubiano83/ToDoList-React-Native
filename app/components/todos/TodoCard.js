@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
-import useCapitalize from "../../hooks/useCapitalize"
+import useCapitalize from "../../hooks/useCapitalize";
 import { Link } from "expo-router";
 
 export default function TodoCard({ item }) {

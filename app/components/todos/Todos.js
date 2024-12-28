@@ -10,7 +10,13 @@ export default function Todos() {
 
     const getTodos = async() => {
         try {
-            const response = await fetch("http://localhost:8080/api/todos/", { method: "GET" });
+            const response = await fetch("http://localhost:8080/api/todos/", { method: "GET", credentials: "include" });
+
+            if (response.status === 401) {
+                console.error("Usuario no autenticado.");
+                return [];
+            }
+            
             const data = await response.json()
             const dataArray = Array.isArray(data.payload.docs) ? data.payload.docs : [data.payload.docs];
             return dataArray
@@ -18,6 +24,8 @@ export default function Todos() {
             console.error("Error al obtener los todos:", error);
         }
     }
+
+    
 
     useEffect(() => {
         const fetchTodos = async () => {

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Pressable, TextInput, View, Text } from "react-native";
-import { Picker } from "@react-native-picker/picker";
 import { useRouter } from "expo-router";
 import Title from "../../Title"
 import DeleteTodo from "../delete/DeleteTodo";
@@ -58,7 +57,7 @@ export default function UpdateTodo({ id }) {
                 <Title>Editar Tarea:</Title>
                 <TextInput type="title" value={title} onChangeText={setTitle} placeholder="Ingrese el Titulo.." className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
                 <TextInput type="category" value={category} onChangeText={setCategory} placeholder="Ingrese la Categoria.." className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
-                <TextInput type="dueDate" value={dueDate} onChangeText={setDueDate} placeholder="Ingrese la Fecha de Entrega.. (DD/MM/YYYY)" className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
+                <TextInput type="dueDate" value={dueDate} onChangeText={setDueDate} placeholder="Ingrese la Fecha de Entrega.. DD/MM/YYYY" className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
                 <Pressable onPress={() => setCompleted(!completed)} className={`w-full h-10 justify-center items-center ${ completed === true ? "bg-green-500" : completed === false ? "bg-red-500" : "bg-gray-500" } border-2 border-black rounded-lg`}>
                     <Text className="text-xl text-white font-bold">
                         {completed == true ? "Completado: Sí" : completed === false ? "Completado: No" : "Selecciona Competado" }
