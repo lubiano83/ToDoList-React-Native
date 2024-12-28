@@ -25,7 +25,7 @@ export default function TodoCard({ item }) {
                 {/* Sección derecha */}
                 <View className="items-end flex-col">
                     <Text className="text-white font-bold"> {item.dueDate} </Text>
-                    <Text className="text-white font-bold"> {capitalize(item.priority)} </Text>
+                    <Text className="text-white font-bold"> {item.priority === "high" ? "Alta" : item.priority === "medium" ? "Media" : item.priority === "low" ? "Baja" : ""} </Text>
                     {item.completed ? (
                          <FontAwesome name="check-circle" size={20} color="green" />
                     ) : (

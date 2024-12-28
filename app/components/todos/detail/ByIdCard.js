@@ -38,9 +38,11 @@ export default function ByIdCard({ item }) {
                         <Text className="text-black text-lg font-bold">Prioridad:</Text>
                         <Text className="text-lg text-black"> { item.priority === "high" ? "Alta" : item.priority === "medium" ? "Media" : item.priority === "low" ? "Baja" : "" } </Text>
                     </View>
-                    <View className="flex-row">
-                        <Text className="text-black text-lg font-bold">Descripcion:</Text>
-                        <Text className="text-lg text-black"> { item.description ? capitalize(item.description) : "Sin descripción.." } </Text>
+                    <View className="w-full">
+                        <Text className="text-black text-lg font-bold">Descripcion: { item.description === "" && <Text className="font-normal">Sin descripción..</Text> } </Text>
+                        <Text className="text-lg text-black mt-1">
+                            {item.description ? capitalize(item.description) : ""}
+                        </Text>
                     </View>
                 </View>
             </ScrollView>
