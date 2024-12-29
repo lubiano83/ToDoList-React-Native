@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         if (logged === false) {
             handleLogout(); // Llama a la función para desconectar al usuario
-            alert("Logout realizado con éxito");
         }
     }, [logged]); // Se ejecutará cada vez que 'logged' cambie
 

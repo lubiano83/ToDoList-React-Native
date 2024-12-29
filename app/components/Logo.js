@@ -5,7 +5,7 @@ export default function Logo() {
     return (
         <Link href="/">
             <Text className="text-white text-2xl font-bold">
-                ToDoList
+                ToDoPro
             </Text>
         </Link>
     )

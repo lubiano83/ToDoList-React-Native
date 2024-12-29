@@ -16,19 +16,23 @@ export default function LogoutButton() {
                 },
                 {
                     text: "Sí",
-                    onPress: handleLogout, // Ejecuta la eliminación si se confirma
+                    onPress: async () => {
+                        try {
+                            await handleLogout(); // Ejecuta la función de logout
+                            alert("Logout realizado con éxito"); // Muestra la alerta después de que handleLogout se complete
+                        } catch (error) {
+                            console.error("Error durante el logout:", error.message);
+                        }
+                    },
                     style: "destructive", // Estilo de botón destructivo (rojo en iOS)
                 },
             ]
         );
-    };
+    };    
 
     return (
         <View className="justify-between items-center w-full">
-            <Pressable
-                onPress={confirmLogout}
-                className="w-full justify-center items-center bg-black border-2 border-black rounded-lg"
-            >
+            <Pressable onPress={confirmLogout} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
                 <Text className="text-xl text-white font-bold">Salir</Text>
             </Pressable>
         </View>
