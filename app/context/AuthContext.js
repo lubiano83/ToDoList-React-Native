@@ -6,6 +6,7 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
 
     const [ logged, setLogged ] = useState(false);
+    const [ user, setUser ] = useState(null);
     const [ email, setEmail ] = useState();
     const [ password, setPassword ] = useState();
     const router = useRouter();
@@ -15,6 +16,10 @@ export const AuthProvider = ({ children }) => {
             handleLogout(); // Llama a la función para desconectar al usuario
         }
     }, [logged]); // Se ejecutará cada vez que 'logged' cambie
+
+    useEffect(() => {
+        handleProfile(); // Llama a `handleProfile` cuando el componente se monta
+    }, []);
 
     const handleLogin = async() => {
         try {
@@ -61,8 +66,22 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
+    const handleProfile = async () => {
+        try {
+            const response = await fetch(`http://localhost:8080/api/users/id`, {
+                method: "GET",
+                credentials: "include",
+            });
+            const data = await response.json();
+            const user = data.payload;
+            setUser(user);
+        } catch (error) {
+            console.error("Error al obtener los datos del usuario:", error.message);
+        }
+    };
+
     return (
-        <AuthContext.Provider value={{ logged, setLogged, handleLogin, handleLogout, email, setEmail, password, setPassword }}>
+        <AuthContext.Provider value={{ logged, setLogged, handleLogin, handleLogout, email, setEmail, password, setPassword, user }}>
             {children}
         </AuthContext.Provider>
     )

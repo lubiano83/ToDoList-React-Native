@@ -1,7 +1,8 @@
-import { View, FlatList, ActivityIndicator } from "react-native";
+import { View, FlatList, ActivityIndicator, Pressable, Text } from "react-native";
 import { useEffect, useState } from "react";
 import Title from "../../Title";
 import ByIdCard from "./ByIdCard";
+import { Link } from "expo-router";
 
 export default function ToDoById({ id }) {
 
@@ -27,11 +28,11 @@ export default function ToDoById({ id }) {
     }, []);
 
     return (
-        <View className="justify-center items-center w-full px-4 h-full pt-4">
+        <View className="justify-between items-center w-full px-4 h-full pt-4">
             { todos.length === 0 ? ( 
                 <ActivityIndicator size="large" color={"black"} />
             ) : (
-                <View className="items-center w-full h-full gap-4">
+                <View className="items-center w-full h-full gap-4 flex-1">
                     <Title>Detalle:</Title>
                     <FlatList
                         className="w-full h-full"
@@ -41,6 +42,13 @@ export default function ToDoById({ id }) {
                     />
                 </View>
             )}
+            <View className="w-full pb-1">
+                <Link href={`/views/todos/update/${id}`} asChild className="mt-4">
+                    <Pressable className="items-center border-2 border-black rounded-lg bg-black">
+                        <Text className="text-lg text-white font-bold">Editar</Text>
+                    </Pressable>
+                </Link>
+            </View>
         </View>
     )
 };

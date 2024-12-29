@@ -1,30 +1,15 @@
 import { useEffect, useState } from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, ActivityIndicator } from "react-native";
 import LogoutButton from "./LogoutButton";
 import { Link } from "expo-router";
 import useCapitalize from "../../../hooks/useCapitalize";
+import useAuth from "../../../hooks/useAuth";
 
 export default function ProfileData() {
     
-    const [user, setUser] = useState(null);
     const { capitalize } = useCapitalize();
-
+    const { user } = useAuth();
     console.log(user)
-
-    useEffect(() => {
-        getUserById();
-    }, []);
-
-    const getUserById = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/users/id`, { method: "GET" });
-            const data = await response.json();
-            const user = data.payload;
-            setUser(user);
-        } catch (error) {
-            console.error("Error al obtener los datos del usuario:", error.message);
-        }
-    };
 
     return (
         <View className="justify-between items-center h-full px-4">
@@ -63,7 +48,7 @@ export default function ProfileData() {
                         </View>
                     </View>
                 ) : (
-                    <Text className="text-black text-lg">Debes ingresar con tu cuenta..</Text>
+                    <ActivityIndicator size={"large"} color={"black"} />
                 )}
             </View>
             <View className="w-full gap-4">

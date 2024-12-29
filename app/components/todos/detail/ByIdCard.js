@@ -7,8 +7,8 @@ export default function ByIdCard({ item }) {
     const { capitalize } = useCapitalize();
 
     return (
-        <View className="justify-between h-screen pb-safe-offset-56">
-            <ScrollView className="w-full mt-4">
+        <View className="justify-between h-screen">
+            <ScrollView className="w-full">
                 <View className="gap-2 h-full justify-between">
                     <View className="flex-row">
                         <Text className="text-black text-lg font-bold">Id:</Text>
@@ -46,11 +46,6 @@ export default function ByIdCard({ item }) {
                     </View>
                 </View>
             </ScrollView>
-            <Link href={`/views/todos/update/${item._id}`} asChild className="mt-4 mb-6">
-                <Pressable className="items-center border-2 border-black rounded-lg bg-black">
-                    <Text className="text-lg text-white font-bold">Editar</Text>
-                </Pressable>
-            </Link>
         </View>
     )
 }

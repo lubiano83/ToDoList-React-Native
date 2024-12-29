@@ -3,7 +3,6 @@ import { Pressable, TextInput, View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import Title from "../../Title"
 import DeleteTodo from "../delete/DeleteTodo";
-import useCapitalize from "../../../hooks/useCapitalize";
 
 export default function UpdateTodo({ id }) {
 
@@ -13,43 +12,53 @@ export default function UpdateTodo({ id }) {
     const [ priority, setPriority ] = useState("low");
     const [ completed, setCompleted ] = useState();
     const [ dueDate, setDueDate ] = useState();
-    const { capitalize } = useCapitalize();
     const router = useRouter();
 
-    const handleUpdate = async() => {
+    const handleUpdate = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/todos/${id}`, {
-              method: "PATCH",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
+            const updateData = {
                 title,
                 category,
                 description,
                 priority,
                 completed,
                 dueDate,
-              }),
+            };
+    
+            // Filtrar campos vacíos o no definidos
+            const filteredData = Object.fromEntries(
+                Object.entries(updateData).filter(([_, value]) => value !== undefined && value !== "")
+            );
+    
+            const response = await fetch(`http://localhost:8080/api/todos/${id}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(filteredData),
             });
-      
+    
+            console.log("Estado de la respuesta:", response.status);
+            console.log("Texto de la respuesta:", await response.text());
+    
             if (response.ok) {
-                await response.json();
-                alert("Tarea creada con exito");
+                alert("Tarea actualizada con éxito");
                 setTitle("");
                 setCategory("");
                 setDescription("");
-                setPriority("");
-                setCompleted("");
+                setPriority("low");
+                setCompleted(null);
                 setDueDate("");
                 router.push("/");
             } else {
-                alert("Error", "Hubo un problema al crear la tarea.");
+                console.error("Error al actualizar la tarea:", response.status, response.statusText);
+                alert("Hubo un problema al actualizar la tarea.");
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Error al enviar los datos:", error.message);
+            alert("Error al enviar los datos al servidor.");
         }
-    }
+    };    
 
     return (
         <View className="justify-between items-center h-full px-4 pt-4">

@@ -1,6 +1,6 @@
-import TodosView from './views/todos/about';
-import LoginView from './views/auth/login/about';
-import useAuth from './hooks/useAuth';
+import TodosView from "../app/views/todos/about";
+import LoginView from "../app/views/auth/login/about";
+import useAuth from "./hooks/useAuth";
 
 export default function Page() {
 

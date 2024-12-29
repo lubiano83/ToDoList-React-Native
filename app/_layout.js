@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Slot } from 'expo-router';
+import { Slot, Stack } from 'expo-router';
 import { View } from "react-native";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
