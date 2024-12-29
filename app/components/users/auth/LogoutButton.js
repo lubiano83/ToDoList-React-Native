@@ -1,31 +1,9 @@
 import { Pressable, View, Text, Alert } from "react-native";
-import { useRouter } from "expo-router";
+import useAuth from "../../../hooks/useAuth";
 
-export default function LogoutButton({ setLogged }) {
+export default function LogoutButton() {
 
-    const router = useRouter();
-
-    const handleLogout = async () => {
-        try {
-            const response = await fetch(`http://localhost:8080/api/users/logout`, {
-                method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include"
-            });
-            if (response.ok) {
-                await response.json();
-                alert("Logout realizado con éxito");
-                setLogged(false);
-                router.push("/");
-            } else {
-                alert("Hubo un problema al realizar el logout");
-            }
-        } catch (error) {
-            console.error("Error al enviar los datos:", error.message);
-        }
-    };
+    const { handleLogout } = useAuth();
 
     const confirmLogout = () => {
         Alert.alert(
