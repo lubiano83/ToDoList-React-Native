@@ -36,11 +36,13 @@ export default function Todos() {
     }, []);
 
     return (
-        <View className="justify-center items-center w-full px-4 h-full pb-5">
-            { todos.length === 0 ? ( 
-                <ActivityIndicator size="large" color={"black"} />
+        <View className="justify-between items-center w-full px-4 flex-1">
+            { todos.length === 0 ? (
+                <View className="justify-center flex-1">
+                    <ActivityIndicator size="large" color={"black"} />
+                </View>
             ) : (
-                <View className="items-center pt-8">
+                <View className="items-center flex-1">
                     <View className="p-4">
                         <Title>Todas las Tareas:</Title>
                     </View>
@@ -52,10 +54,10 @@ export default function Todos() {
                     />
                 </View> 
             )}
-            <View className="w-full py-4">
+            <View className="w-full py-4 pb-1">
                 <Link href="/views/todos/create/about" asChild>
                     <Pressable className="border-2 border-black bg-black w-full rounded-lg justify-center items-center">
-                        <Text className="text-white font-bold text-xl">Crear Tarea</Text>
+                        <Text className="text-white font-bold text-xl">Agregar Tarea</Text>
                     </Pressable>
                 </Link>
             </View>

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { View, Text, Image, Pressable, ActivityIndicator } from "react-native";
 import LogoutButton from "./LogoutButton";
 import { Link } from "expo-router";
@@ -11,11 +10,10 @@ export default function ProfileData() {
     const { user } = useAuth();
 
     return (
-        <View className="justify-between items-center h-full px-4">
-            <View className="justify-center items-center flex-1">
-                {/* Renderiza los datos del usuario si están disponibles */}
+        <View className="justify-between items-center w-full px-4 flex-1">
+            <View className="justify-center items-center w-full flex-1">
                 {user ? (
-                    <View className="justify-center items-center gap-4">
+                    <View className="justify-center items-center gap-4 flex-1">
                         <View className="border-2 border-black h-[200] w-[200] rounded-xl">
                             <Image src={user.image} height={200} width={200} />
                         </View>
@@ -50,8 +48,8 @@ export default function ProfileData() {
                     <ActivityIndicator size={"large"} color={"black"} />
                 )}
             </View>
-            <View className="w-full gap-4">
-                <Link href="/" asChild className="w-full">
+            <View className="w-full gap-4 pb-1">
+                <Link href="/views/auth/update/about" asChild className="w-full">
                     <Pressable className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
                         <Text className="text-white font-bold text-xl">Editar</Text>
                     </Pressable>
