@@ -1,9 +1,9 @@
 import LoginForm from "../../../components/users/auth/LoginForm";
 
-export default function LoginView({ setLogged }) {
+export default function LoginView() {
     return (
         <>
-           <LoginForm setLogged={setLogged} />
+           <LoginForm />
         </>
     )
 }
