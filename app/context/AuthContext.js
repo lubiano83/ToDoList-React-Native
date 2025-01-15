@@ -1,45 +1,45 @@
 import { createContext, useEffect, useState } from "react";
 import { useRouter } from "expo-router";
+import * as ImagePicker from "expo-image-picker";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    
-    const [ logged, setLogged ] = useState(false);
-    const [ user, setUser ] = useState(null);
-    const [ first_name, setFirst_name ] = useState();
-    const [ last_name, setLast_name ] = useState();
-    const [ email, setEmail ] = useState();
-    const [ password, setPassword ] = useState();
-    const [ image, setImage ] = useState();
-    const [ token, setToken ] = useState();
+    const [logged, setLogged] = useState(false);
+    const [user, setUser] = useState(null);
+    const [first_name, setFirst_name] = useState("");
+    const [last_name, setLast_name] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [image, setImage] = useState("");
+    const [token, setToken] = useState("");
     const router = useRouter();
-    
+
     useEffect(() => {
-        if(logged === true) {
+        if (logged) {
             handleProfile();
         } else {
             handleLogout();
         }
     }, [logged]);
 
-    const handleLogin = async() => {
+    // Login
+    const handleLogin = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/login`, {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
                 credentials: "include",
-                body: JSON.stringify({ email, password })
+                body: JSON.stringify({ email, password }),
             });
-            
+
             if (response.ok) {
-                await response.json();
+                const data = await response.json();
+                setUser(data.payload);
                 setLogged(true);
                 setEmail("");
                 setPassword("");
-                alert("Login realizado con exito");
+                alert("Login realizado con éxito");
                 router.push("/");
             } else {
                 alert("Hubo un problema al realizar el login");
@@ -47,17 +47,17 @@ export const AuthProvider = ({ children }) => {
         } catch (error) {
             console.error("Error al enviar los datos:", error.message);
         }
-    }
-    
-    const handleLogout = async() => {
+    };
+
+    // Logout
+    const handleLogout = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/logout`, {
                 method: "DELETE",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                credentials: "include"
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
             });
+
             if (response.ok) {
                 await response.json();
                 setUser(null);
@@ -68,48 +68,49 @@ export const AuthProvider = ({ children }) => {
             console.error("Error al enviar los datos:", error.message);
         }
     };
-    
-    const handleProfile = async() => {
+
+    // Fetch user profile
+    const handleProfile = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/id`, {
                 method: "GET",
                 credentials: "include",
             });
-            const data = await response.json();
-            const user = data.payload;
-            setUser(user);
+            if (response.ok) {
+                const data = await response.json();
+                setUser(data.payload);
+            }
         } catch (error) {
             console.error("Error al obtener los datos del usuario:", error.message);
         }
     };
-    
-    const handleRegister = async() => {
+
+    // Register user
+    const handleRegister = async () => {
         try {
             const response = await fetch(`http://localhost:8080/api/users/register`, {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              credentials: "include",
-              body: JSON.stringify({ first_name, last_name, email, password })
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                credentials: "include",
+                body: JSON.stringify({ first_name, last_name, email, password }),
             });
-      
+
             if (response.ok) {
-                await response.json();
-                alert("Registro realizado con exito");
+                alert("Registro realizado con éxito");
                 setFirst_name("");
                 setLast_name("");
                 setEmail("");
                 setPassword("");
                 router.push("/views/auth/login/about");
             } else {
-                alert("Hubo un problema al registrar un usuario");
+                alert("Hubo un problema al registrar el usuario");
             }
-          } catch (error) {
-            console.error("Error al enviar los datos:", error.message);
+        } catch (error) {
+            console.error("Error al registrar usuario:", error.message);
         }
-    }
+    };
 
+    // Update user profile
     const handleUpdate = async () => {
         try {
             const formData = new FormData();
@@ -119,14 +120,16 @@ export const AuthProvider = ({ children }) => {
                 formData.append("image", {
                     uri: image,
                     type: image.endsWith(".png") ? "image/png" : "image/jpeg",
-                    name: `profile.${image.split(".").pop()}`
+                    name: `profile.${image.split(".").pop()}`,
                 });
             }
-            const response = await fetch(`http://localhost:8080/api/users/id`, { 
+
+            const response = await fetch(`http://localhost:8080/api/users/id`, {
                 method: "PATCH",
                 body: formData,
-                credentials: "include" 
+                credentials: "include",
             });
+
             if (response.ok) {
                 const updatedUser = await response.json();
                 alert("Datos actualizados con éxito");
@@ -134,21 +137,67 @@ export const AuthProvider = ({ children }) => {
                 setFirst_name("");
                 setLast_name("");
                 setImage("");
-                router.push("/views/auth/profile/about")
+                router.push("/views/auth/profile/about");
             } else {
-                const errorData = await response.json();
-                alert(`Error al actualizar los datos: ${errorData.message}`);
+                alert("Hubo un error al actualizar los datos");
             }
         } catch (error) {
             console.error("Error al actualizar los datos:", error.message);
         }
-    };    
+    };
+
+    // Select image from gallery
+    const handleSelectImage = async () => {
+        try {
+            // Solicitar permisos para la galería
+            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+            if (status !== "granted") {
+                alert("Se necesita acceso a la galería para seleccionar imágenes.");
+                return;
+            }
+
+            // Abrir la galería para seleccionar una imagen
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: "Images", // Cambiado a string directo para evitar deprecation
+                allowsEditing: true,
+                quality: 1,
+            });
+
+            if (!result.canceled) {
+                setImage(result.assets[0].uri); // Guarda el URI de la imagen seleccionada
+            }
+        } catch (error) {
+            console.error("Error al seleccionar imagen:", error.message);
+        }
+    };
 
     return (
-        <AuthContext.Provider value={{ logged, setLogged, handleLogin, handleLogout, email, setEmail, password, setPassword, user, handleRegister, first_name, setFirst_name, last_name, setLast_name, handleUpdate, image, setImage }}>
+        <AuthContext.Provider
+            value={{
+                logged,
+                setLogged,
+                handleLogin,
+                handleLogout,
+                handleProfile,
+                email,
+                setEmail,
+                password,
+                setPassword,
+                user,
+                handleRegister,
+                first_name,
+                setFirst_name,
+                last_name,
+                setLast_name,
+                handleUpdate,
+                handleSelectImage,
+                image,
+                setImage,
+            }}
+        >
             {children}
         </AuthContext.Provider>
-    )
+    );
 };
 
 export default AuthProvider;

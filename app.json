@@ -9,8 +9,19 @@
     "newArchEnabled": true,
     "entryPoint": "expo-router/entry",
     "ios": {
-      "supportsTablet": true
+    "infoPlist": {
+      "NSCameraUsageDescription": "Esta aplicación necesita acceder a la cámara para tomar fotos.",
+      "NSPhotoLibraryUsageDescription": "Esta aplicación necesita acceder a la galería para seleccionar imágenes."
+    }
+  },
+    "android": {
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
+
     "web": {
       "favicon": "./assets/favicon.png"
     }
