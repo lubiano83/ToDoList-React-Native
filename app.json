@@ -9,19 +9,20 @@
     "newArchEnabled": true,
     "entryPoint": "expo-router/entry",
     "ios": {
-    "infoPlist": {
-      "NSCameraUsageDescription": "Esta aplicación necesita acceder a la cámara para tomar fotos.",
-      "NSPhotoLibraryUsageDescription": "Esta aplicación necesita acceder a la galería para seleccionar imágenes."
-    }
-  },
+      "infoPlist": {
+        "NSCameraUsageDescription": "Esta aplicación necesita acceso a la cámara para tomar fotos.",
+        "NSPhotoLibraryUsageDescription": "Esta aplicación necesita acceso a la galería para seleccionar imágenes.",
+        "NSPhotoLibraryAddUsageDescription": "Esta aplicación necesita guardar imágenes en tu galería."
+      }
+    },
     "android": {
       "permissions": [
         "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
+        "READ_MEDIA_IMAGES",
+        "READ_MEDIA_VIDEO",
+        "READ_MEDIA_AUDIO"
       ]
     },
-
     "web": {
       "favicon": "./assets/favicon.png"
     }

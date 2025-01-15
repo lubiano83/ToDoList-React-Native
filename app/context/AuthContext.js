@@ -1,6 +1,7 @@
 import { createContext, useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
+import { Linking } from "react-native";
 
 export const AuthContext = createContext();
 
@@ -12,7 +13,6 @@ export const AuthProvider = ({ children }) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [image, setImage] = useState("");
-    const [token, setToken] = useState("");
     const router = useRouter();
 
     useEffect(() => {
@@ -72,16 +72,23 @@ export const AuthProvider = ({ children }) => {
     // Fetch user profile
     const handleProfile = async () => {
         try {
-            const response = await fetch(`http://localhost:8080/api/users/id`, {
-                method: "GET",
-                credentials: "include",
-            });
-            if (response.ok) {
-                const data = await response.json();
-                setUser(data.payload);
-            }
+          const response = await fetch(`http://localhost:8080/api/users/id`, {
+            method: "GET",
+            credentials: "include", // Asegúrate de manejar cookies/sesiones si es necesario
+          });
+      
+          if (response.ok) {
+            const data = await response.json();
+            console.log(data)
+      
+            // Actualiza el estado con los datos del usuario, incluyendo la URL de la imagen
+            setUser(data.payload);
+            setImage(data.payload.image); // Asume que el campo 'image' contiene la URL
+          } else {
+            console.error("Error al obtener el perfil del usuario");
+          }
         } catch (error) {
-            console.error("Error al obtener los datos del usuario:", error.message);
+          console.error("Error al obtener los datos del usuario:", error.message);
         }
     };
 
@@ -151,25 +158,35 @@ export const AuthProvider = ({ children }) => {
         try {
             // Solicitar permisos para la galería
             const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-            if (status !== "granted") {
+    
+            console.log("Estado del permiso:", status);
+    
+            if (status === "denied") {
                 alert("Se necesita acceso a la galería para seleccionar imágenes.");
+                Linking.openSettings(); // Redirige a la configuración del dispositivo
                 return;
             }
-
+    
             // Abrir la galería para seleccionar una imagen
             const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: "Images", // Cambiado a string directo para evitar deprecation
-                allowsEditing: true,
-                quality: 1,
+                mediaTypes: "photo", // Usa directamente el string "photo"
+                allowsEditing: true, // Permite recortar la imagen seleccionada
+                quality: 1, // Calidad máxima
             });
-
+    
+            console.log("Resultado del picker:", result);
+    
+            // Verificar si no se canceló la selección de imagen
             if (!result.canceled) {
+                console.log("Imagen seleccionada:", result.assets[0].uri);
                 setImage(result.assets[0].uri); // Guarda el URI de la imagen seleccionada
+            } else {
+                console.log("No se seleccionó ninguna imagen, se mantiene la anterior.");
             }
         } catch (error) {
             console.error("Error al seleccionar imagen:", error.message);
         }
-    };
+    };    
 
     return (
         <AuthContext.Provider

@@ -6,8 +6,9 @@ import useAuth from "../../../hooks/useAuth";
 
 export default function ProfileData() {
     
-    const { capitalize } = useCapitalize();
+    const { capitalize, capitalizeEachWord } = useCapitalize();
     const { user } = useAuth();
+    console.log(user.image)
 
     return (
         <View className="justify-between items-center w-full px-4 flex-1">
@@ -15,7 +16,7 @@ export default function ProfileData() {
                 {user ? (
                     <View className="justify-center items-center gap-4 flex-1">
                         <View className="border-2 border-black h-[200] w-[200] rounded-xl">
-                            <Image src={user.image} height={200} width={200} />
+                            <Image source={{ uri: user.image }} style={{ width: 196, height: 196, borderRadius: 8 }} />
                         </View>
                         <View className="justify-center items-start">
                             <View className="flex-row gap-1">
@@ -24,7 +25,7 @@ export default function ProfileData() {
                             </View>
                             <View className="flex-row gap-1">
                                 <Text className="text-black font-bold text-lg">Nombre:</Text>
-                                <Text className="text-black text-lg">{capitalize(user.first_name)} {capitalize(user.last_name)}</Text>
+                                <Text className="text-black text-lg">{capitalizeEachWord(user.first_name)} {capitalizeEachWord(user.last_name)}</Text>
                             </View>
                             <View className="flex-row gap-1">
                                 <Text className="text-black font-bold text-lg">Email:</Text>
