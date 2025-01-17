@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pressable, TextInput, View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import Title from "../../Title"
+import GoBack from "../../GoBack";
 
 export default function CreateTodo() {
 
@@ -47,9 +48,12 @@ export default function CreateTodo() {
                 <TextInput type="category" value={category} onChangeText={setCategory} placeholder="Ingrese la Categoria.." className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
                 <TextInput type="dueDate" value={dueDate} onChangeText={setDueDate} placeholder="Ingrese la Fecha de Entrega.. (DD/MM/YYYY)" className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
             </View>
-            <Pressable onPress={handleCreate} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
-                <Text className="text-xl text-white font-bold">Add</Text>
-            </Pressable>
+            <View className="w-full gap-4">
+                <Pressable onPress={handleCreate} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
+                    <Text className="text-xl text-white font-bold">Add</Text>
+                </Pressable>
+                <GoBack />
+            </View>
         </View>
     )
 };

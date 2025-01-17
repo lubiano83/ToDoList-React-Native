@@ -3,6 +3,7 @@ import LogoutButton from "./LogoutButton";
 import { Link } from "expo-router";
 import useCapitalize from "../../../hooks/useCapitalize";
 import useAuth from "../../../hooks/useAuth";
+import GoBack from "../../GoBack";
 
 export default function ProfileData() {
     
@@ -50,12 +51,17 @@ export default function ProfileData() {
                 )}
             </View>
             <View className="w-full gap-4 pb-1">
-                <Link href="/views/auth/update/about" asChild className="w-full">
-                    <Pressable className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
-                        <Text className="text-white font-bold text-xl">Editar</Text>
-                    </Pressable>
-                </Link>
-                <LogoutButton />
+                <View className="gap-2 w-full px-1 flex-row justify-center items-center">
+                    <View className="w-1/2">
+                        <LogoutButton />
+                    </View>
+                    <Link href="/views/auth/update/about" asChild className="w-1/2">
+                        <Pressable className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
+                            <Text className="text-white font-bold text-lg">Editar</Text>
+                        </Pressable>
+                    </Link>
+                </View>
+                <GoBack />
             </View>
         </View>
     );

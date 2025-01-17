@@ -33,7 +33,7 @@ export default function LogoutButton() {
     return (
         <View className="justify-between items-center w-full">
             <Pressable onPress={confirmLogout} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
-                <Text className="text-xl text-white font-bold">Salir</Text>
+                <Text className="text-lg text-white font-bold">Salir</Text>
             </Pressable>
         </View>
     );

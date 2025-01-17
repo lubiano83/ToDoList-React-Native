@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Title from "../../Title";
 import ByIdCard from "./ByIdCard";
 import { Link } from "expo-router";
+import GoBack from "../../GoBack"
 
 export default function ToDoById({ id }) {
 
@@ -42,12 +43,13 @@ export default function ToDoById({ id }) {
                     />
                 </View>
             )}
-            <View className="w-full pb-1">
+            <View className="w-full pb-1 gap-4">
                 <Link href={`/views/todos/update/${id}`} asChild className="mt-4">
                     <Pressable className="items-center border-2 border-black rounded-lg bg-black">
                         <Text className="text-lg text-white font-bold">Editar</Text>
                     </Pressable>
                 </Link>
+                <GoBack />
             </View>
         </View>
     )

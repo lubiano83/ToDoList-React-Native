@@ -3,6 +3,7 @@ import { Pressable, TextInput, View, Text } from "react-native";
 import { useRouter } from "expo-router";
 import Title from "../../Title"
 import DeleteTodo from "../delete/DeleteTodo";
+import GoBack from "../../GoBack";
 
 export default function UpdateTodo({ id }) {
 
@@ -84,10 +85,15 @@ export default function UpdateTodo({ id }) {
                 <TextInput type="description"  multiline={true} numberOfLines={10} value={description} onChangeText={setDescription} placeholder="Ingrese la Descripción.." className="border-2 border-black rounded-lg pl-2 shdaow-black shadow-sm text-black w-full h-1/4" />
             </View>
             <View className="w-full gap-4 pb-1">
-                <Pressable onPress={handleUpdate} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
-                    <Text className="text-xl text-white font-bold">Update</Text>
-                </Pressable>
-                <DeleteTodo id={id} />
+                <View className="flex-row justify-center items-center w-full gap-2 px-1">
+                    <View className="w-1/2">
+                        <DeleteTodo id={id} />
+                    </View>
+                    <Pressable onPress={handleUpdate} className="w-1/2 justify-center items-center bg-black border-2 border-black rounded-lg">
+                        <Text className="text-lg text-white font-bold">Update</Text>
+                    </Pressable>
+                </View>
+                <GoBack />
             </View>
         </View>
     )

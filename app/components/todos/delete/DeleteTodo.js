@@ -50,7 +50,7 @@ export default function DeleteTodo({ id }) {
                 onPress={confirmDelete}
                 className="w-full justify-center items-center bg-black border-2 border-black rounded-lg"
             >
-                <Text className="text-xl text-white font-bold">Delete</Text>
+                <Text className="text-lg text-white font-bold">Delete</Text>
             </Pressable>
         </View>
     );
