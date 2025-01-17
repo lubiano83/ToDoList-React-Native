@@ -18,7 +18,7 @@ export default function Todos() {
             }
             
             const data = await response.json()
-            const dataArray = Array.isArray(data.payload.docs) ? data.payload.docs : [data.payload.docs];
+            const dataArray = Array.isArray(data.payload) ? data.payload : [data.payload];
             return dataArray
         } catch (error) {
             console.error("Error al obtener los todos:", error);
