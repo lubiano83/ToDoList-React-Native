@@ -17,7 +17,7 @@ export default function ProfileData() {
                 {user ? (
                     <View className="justify-center items-center gap-4 flex-1">
                         <View className="border-2 border-black h-[200] w-[200] rounded-xl">
-                            <Image source={{ uri: user.image }} style={{ width: 196, height: 196, borderRadius: 8 }} />
+                            <Image  source={{ uri: user.image }} style={{ width: 196, height: 196, borderRadius: 8 }} />
                         </View>
                         <View className="justify-center items-start">
                             <View className="flex-row gap-1">
@@ -55,8 +55,8 @@ export default function ProfileData() {
                     <View className="w-1/2">
                         <LogoutButton />
                     </View>
-                    <Link href="/views/auth/update/about" asChild className="w-1/2">
-                        <Pressable className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
+                    <Link href="/views/auth/update/about" asChild>
+                        <Pressable className="w-1/2 justify-center items-center bg-black border-2 border-black rounded-lg">
                             <Text className="text-white font-bold text-lg">Editar</Text>
                         </Pressable>
                     </Link>

@@ -4,6 +4,7 @@ import Title from "../../Title";
 import GoBack from "../../GoBack";
 
 export default function UpdateUser() {
+
   const { first_name, setFirst_name, last_name, setLast_name, image, handleUpdate, handleSelectImage } = useAuth();
 
   return (

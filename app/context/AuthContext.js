@@ -32,7 +32,6 @@ export const AuthProvider = ({ children }) => {
                 credentials: "include",
                 body: JSON.stringify({ email, password }),
             });
-
             if (response.ok) {
                 const data = await response.json();
                 setUser(data.payload);
@@ -57,7 +56,6 @@ export const AuthProvider = ({ children }) => {
                 headers: { "Content-Type": "application/json" },
                 credentials: "include",
             });
-
             if (response.ok) {
                 await response.json();
                 setUser(null);
@@ -74,16 +72,13 @@ export const AuthProvider = ({ children }) => {
         try {
           const response = await fetch(`http://localhost:8080/api/users/id`, {
             method: "GET",
-            credentials: "include", // Asegúrate de manejar cookies/sesiones si es necesario
+            credentials: "include",
           });
-      
           if (response.ok) {
             const data = await response.json();
             console.log(data)
-      
-            // Actualiza el estado con los datos del usuario, incluyendo la URL de la imagen
             setUser(data.payload);
-            setImage(data.payload.image); // Asume que el campo 'image' contiene la URL
+            setImage(data.payload.image);
           } else {
             console.error("Error al obtener el perfil del usuario");
           }
@@ -101,7 +96,6 @@ export const AuthProvider = ({ children }) => {
                 credentials: "include",
                 body: JSON.stringify({ first_name, last_name, email, password }),
             });
-
             if (response.ok) {
                 alert("Registro realizado con éxito");
                 setFirst_name("");
@@ -130,13 +124,11 @@ export const AuthProvider = ({ children }) => {
                     name: `profile.${image.split(".").pop()}`,
                 });
             }
-
             const response = await fetch(`http://localhost:8080/api/users/id`, {
                 method: "PATCH",
                 body: formData,
                 credentials: "include",
             });
-
             if (response.ok) {
                 const updatedUser = await response.json();
                 alert("Datos actualizados con éxito");
@@ -156,30 +148,21 @@ export const AuthProvider = ({ children }) => {
     // Select image from gallery
     const handleSelectImage = async () => {
         try {
-            // Solicitar permisos para la galería
             const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    
-            console.log("Estado del permiso:", status);
-    
             if (status === "denied") {
                 alert("Se necesita acceso a la galería para seleccionar imágenes.");
-                Linking.openSettings(); // Redirige a la configuración del dispositivo
+                Linking.openSettings();
                 return;
             }
-    
-            // Abrir la galería para seleccionar una imagen
             const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: "photo", // Usa directamente el string "photo"
-                allowsEditing: true, // Permite recortar la imagen seleccionada
-                quality: 1, // Calidad máxima
+                mediaTypes: "photo",
+                allowsEditing: true,
+                quality: 1,
             });
-    
             console.log("Resultado del picker:", result);
-    
-            // Verificar si no se canceló la selección de imagen
             if (!result.canceled) {
                 console.log("Imagen seleccionada:", result.assets[0].uri);
-                setImage(result.assets[0].uri); // Guarda el URI de la imagen seleccionada
+                setImage(result.assets[0].uri);
             } else {
                 console.log("No se seleccionó ninguna imagen, se mantiene la anterior.");
             }
