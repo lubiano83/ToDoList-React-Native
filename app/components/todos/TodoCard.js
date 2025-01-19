@@ -3,12 +3,10 @@ import Entypo from '@expo/vector-icons/Entypo';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import useCapitalize from "../../hooks/useCapitalize";
 import { Link } from "expo-router";
-import useAuth from "../../hooks/useAuth"
 
 export default function TodoCard({ item }) {
 
     const { capitalize } = useCapitalize();
-    const { user } = useAuth();
 
     return (
         <Link href={`/views/todos/detail/${item._id}`} className="border-2 mb-4 border-white rounded-xl p-2 flex justify-between items-center bg-black shadow-black shadow-sm">
@@ -21,6 +19,7 @@ export default function TodoCard({ item }) {
                     <View className="flex-row">
                         <Text className="text-white font-bold">Categoria:</Text>
                         <Text numberOfLines={1} ellipsizeMode="tail" className="text-white"> {capitalize(item.category)} </Text>
+                        
                     </View>
                 </View>
 

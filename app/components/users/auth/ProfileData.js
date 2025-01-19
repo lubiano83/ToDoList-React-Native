@@ -9,7 +9,6 @@ export default function ProfileData() {
     
     const { capitalize, capitalizeEachWord } = useCapitalize();
     const { user } = useAuth();
-    console.log(user.image)
 
     return (
         <View className="justify-between items-center w-full px-4 flex-1">

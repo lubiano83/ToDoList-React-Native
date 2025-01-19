@@ -76,7 +76,6 @@ export const AuthProvider = ({ children }) => {
           });
           if (response.ok) {
             const data = await response.json();
-            console.log(data)
             setUser(data.payload);
             setImage(data.payload.image);
           } else {

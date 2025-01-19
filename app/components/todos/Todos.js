@@ -57,7 +57,7 @@ export default function Todos() {
             <View className="w-full py-4 pb-1">
                 <Link href="/views/todos/create/about" asChild>
                     <Pressable className="border-2 border-black bg-black w-full rounded-lg justify-center items-center">
-                        <Text className="text-white font-bold text-xl">Agregar Tarea</Text>
+                        <Text className="text-white font-bold text-lg">Agregar Tarea</Text>
                     </Pressable>
                 </Link>
             </View>
