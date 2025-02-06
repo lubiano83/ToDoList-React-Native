@@ -4,11 +4,14 @@ import { Link } from "expo-router";
 import useCapitalize from "../../../hooks/useCapitalize";
 import useAuth from "../../../hooks/useAuth";
 import GoBack from "../../GoBack";
+import TeamImage from "../../TeamImage";
 
 export default function ProfileData() {
-    
     const { capitalize, capitalizeEachWord } = useCapitalize();
     const { user } = useAuth();
+
+    console.log("🔍 Usuario:", user);
+    console.log("🔍 Equipo:", user?.team);
 
     return (
         <View className="justify-between items-center w-full px-4 flex-1">
@@ -16,7 +19,7 @@ export default function ProfileData() {
                 {user ? (
                     <View className="justify-center items-center gap-4 flex-1">
                         <View className="border-2 border-black h-[200] w-[200] rounded-xl">
-                            <Image  source={{ uri: user.image }} style={{ width: 196, height: 196, borderRadius: 8 }} />
+                            <Image source={{ uri: user.image }} style={{ width: 196, height: 196, borderRadius: 8 }} />
                         </View>
                         <View className="justify-center items-start">
                             <View className="flex-row gap-1">
@@ -42,6 +45,18 @@ export default function ProfileData() {
                             <View className="flex-row gap-1">
                                 <Text className="text-black font-bold text-lg">Modificado:</Text>
                                 <Text className="text-black text-lg">{user.updatedAt}</Text>
+                            </View>
+                            <View className="flex-row gap-1">
+                                <Text className="text-black font-bold text-lg">Equipo:</Text>
+                                <View style={{ flexDirection: "row", gap: 8 }}>
+                                    {user.team && user.team.length > 0 ? (
+                                        user.team.map((item, index) => (
+                                            <TeamImage key={index} image={item.image} />
+                                        ))
+                                    ) : (
+                                        <Text className="text-gray-500">Sin equipo</Text>
+                                    )}
+                                </View>
                             </View>
                         </View>
                     </View>

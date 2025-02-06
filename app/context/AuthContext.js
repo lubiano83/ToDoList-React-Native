@@ -154,8 +154,9 @@ export const AuthProvider = ({ children }) => {
                 return;
             }
             const result = await ImagePicker.launchImageLibraryAsync({
-                mediaTypes: "photo",
+                mediaTypes: "images",
                 allowsEditing: true,
+                aspect: [1, 1],
                 quality: 1,
             });
             console.log("Resultado del picker:", result);
