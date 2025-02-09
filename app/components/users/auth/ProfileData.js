@@ -10,9 +10,6 @@ export default function ProfileData() {
     const { capitalize, capitalizeEachWord } = useCapitalize();
     const { user } = useAuth();
 
-    console.log("🔍 Usuario:", user);
-    console.log("🔍 Equipo:", user?.team);
-
     return (
         <View className="justify-between items-center w-full px-4 flex-1">
             <View className="justify-center items-center w-full flex-1">
@@ -46,18 +43,24 @@ export default function ProfileData() {
                                 <Text className="text-black font-bold text-lg">Modificado:</Text>
                                 <Text className="text-black text-lg">{user.updatedAt}</Text>
                             </View>
-                            <View className="flex-row gap-1">
-                                <Text className="text-black font-bold text-lg">Equipo:</Text>
-                                <View style={{ flexDirection: "row", gap: 8 }}>
-                                    {user.team && user.team.length > 0 ? (
-                                        user.team.map((item, index) => (
+                            { user.team.length > 0 ?
+                                <View className="flex-row gap-1">
+                                    <Text className="text-black font-bold text-lg">Equipo:</Text>
+                                    <View className="flex flex-row gap-2 flex-wrap">
+                                        {user.team.map((item, index) => (
                                             <TeamImage key={index} image={item.image} />
-                                        ))
-                                    ) : (
-                                        <Text className="text-gray-500">Sin equipo</Text>
-                                    )}
+                                        ))}
+                                    </View>
                                 </View>
-                            </View>
+                            : "" }
+                            { user.company.companyName ? 
+                                <View className="flex-row gap-1">
+                                    <Text className="text-black font-bold text-lg">Lider:</Text>
+                                    <Link href="/">
+                                        <Text className="text-black text-lg">{capitalizeEachWord(user.company.companyName)}</Text>
+                                    </Link>
+                                </View>
+                            : "" }
                         </View>
                     </View>
                 ) : (
