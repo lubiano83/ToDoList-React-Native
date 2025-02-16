@@ -1,4 +1,4 @@
-import ProfileData from "../../../components/users/auth/ProfileData";
+import ProfileData from "../../../components/users/ProfileData";
 
 export default function ProfileView() {
 

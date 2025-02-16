@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Image, View } from 'react-native';
 import Logo from '../Logo';
 import { Link } from 'expo-router';
 import useAuth from '../../hooks/useAuth';
@@ -12,6 +12,9 @@ export default function Navbar() {
   return (
     <View className="bg-black w-full py-4 px-6 flex-row justify-between">
       <Logo />
+      <Link href={"/views/team/about"}>
+        { logged && <Image source={require("../../../assets/link-two-svgrepo-com.webp")} alt='team image' /> }
+      </Link>
       <Link href={"/views/auth/profile/about"}>
         { logged && <UserImage /> }
       </Link>

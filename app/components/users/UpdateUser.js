@@ -1,7 +1,7 @@
 import { Pressable, Text, TextInput, View, Image } from "react-native";
-import useAuth from "../../../hooks/useAuth";
-import Title from "../../Title";
-import GoBack from "../../GoBack";
+import useAuth from "../../hooks/useAuth";
+import Title from "../Title";
+import GoBack from "../GoBack";
 
 export default function UpdateUser() {
 
@@ -23,7 +23,9 @@ export default function UpdateUser() {
         <Pressable onPress={handleUpdate} className="w-full justify-center items-center bg-black border-2 border-black rounded-lg">
           <Text className="text-xl text-white font-bold">Actualizar</Text>
         </Pressable>
-        <GoBack />
+        <View className="w-full gap-4 pb-1">
+          <GoBack />
+        </View>
       </View>
     </View>
   );

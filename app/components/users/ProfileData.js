@@ -1,10 +1,10 @@
 import { View, Text, Image, Pressable, ActivityIndicator } from "react-native";
-import LogoutButton from "./LogoutButton";
+import LogoutButton from "./auth/LogoutButton";
 import { Link } from "expo-router";
-import useCapitalize from "../../../hooks/useCapitalize";
-import useAuth from "../../../hooks/useAuth";
-import GoBack from "../../GoBack";
-import TeamImage from "../../TeamImage";
+import useCapitalize from "../../hooks/useCapitalize";
+import useAuth from "../../hooks/useAuth";
+import GoBack from "../GoBack";
+import TeamImage from "../TeamImage";
 
 export default function ProfileData() {
     const { capitalize, capitalizeEachWord } = useCapitalize();
