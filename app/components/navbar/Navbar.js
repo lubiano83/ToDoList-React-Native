@@ -15,7 +15,7 @@ export default function Navbar() {
       <Link href={"/views/team/about"}>
         { logged && <Image source={require("../../../assets/link-two-svgrepo-com.webp")} alt='team image' /> }
       </Link>
-      <Link href={"/views/auth/profile/about"}>
+      <Link href={"/views/users/profile/about"}>
         { logged && <UserImage /> }
       </Link>
     </View>
