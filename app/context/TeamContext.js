@@ -2,7 +2,7 @@ import { createContext, useEffect, useState } from "react";
 
 export const TeamContext  = createContext();
 
-export const TeamProvider = () => {
+export const TeamProvider = ({ children }) => {
 
     const updateRoleById = () => {};
     const updateCategoryById = () => {};
@@ -13,7 +13,7 @@ export const TeamProvider = () => {
     const rejectInvitation = () => {};
 
     return (
-        <TeamContext.Provider value={{}}>
+        <TeamContext.Provider value={{ updateRoleById, updateCategoryById, addUserToTeam, removeUserFromTeam, leaveTheTeam, acceptInvitation, rejectInvitation }}>
                 {children}
         </TeamContext.Provider>
     )
