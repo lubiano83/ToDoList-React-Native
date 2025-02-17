@@ -33,7 +33,7 @@ export default function ProfileData() {
                             </View>
                             <View className="flex-row gap-1">
                                 <Text className="text-black font-bold text-lg">Role:</Text>
-                                <Text className="text-black text-lg">{capitalize(user.role)}</Text>
+                                <Text className="text-black text-lg">{user.role === "chief" ? "Lider" : user.role === "boss" ? "Jefe" : "Empleado"}</Text>
                             </View>
                             <View className="flex-row gap-1">
                                 <Text className="text-black font-bold text-lg">Creado:</Text>
@@ -72,7 +72,7 @@ export default function ProfileData() {
                     <View className="w-1/2">
                         <LogoutButton />
                     </View>
-                    <Link href="/views/auth/update/about" asChild>
+                    <Link href="/views/users/update/about" asChild>
                         <Pressable className="w-1/2 justify-center items-center bg-black border-2 border-black rounded-lg">
                             <Text className="text-white font-bold text-lg">Editar</Text>
                         </Pressable>

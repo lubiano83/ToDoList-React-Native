@@ -11,7 +11,7 @@ export default function UpdateTodo({ id }) {
     const [ category, setCategory ] = useState();
     const [ description, setDescription ] = useState();
     const [ priority, setPriority ] = useState("low");
-    const [ completed, setCompleted ] = useState();
+    const [ completed, setCompleted ] = useState("false");
     const [ dueDate, setDueDate ] = useState();
     const router = useRouter();
 
@@ -39,15 +39,12 @@ export default function UpdateTodo({ id }) {
                 body: JSON.stringify(filteredData),
             });
     
-            console.log("Estado de la respuesta:", response.status);
-            console.log("Texto de la respuesta:", await response.text());
-    
             if (response.ok) {
                 alert("Tarea actualizada con éxito");
                 setTitle("");
                 setCategory("");
                 setDescription("");
-                setPriority("low");
+                setPriority(null);
                 setCompleted(null);
                 setDueDate("");
                 router.push("/");
@@ -68,19 +65,29 @@ export default function UpdateTodo({ id }) {
                 <TextInput type="title" value={title} onChangeText={setTitle} placeholder="Ingrese el Titulo.." className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
                 <TextInput type="category" value={category} onChangeText={setCategory} placeholder="Ingrese la Categoria.." className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
                 <TextInput type="dueDate" value={dueDate} onChangeText={setDueDate} placeholder="Ingrese la Fecha de Entrega.. DD/MM/YYYY" className="border-2 border-black rounded-lg h-10 pl-2 shdaow-black shadow-sm text-black w-full" />
-                <Pressable onPress={() => setCompleted(!completed)} className={`w-full h-10 justify-center items-center ${ completed === true ? "bg-green-500" : completed === false ? "bg-red-500" : "bg-gray-500" } border-2 border-black rounded-lg`}>
-                    <Text className="text-xl text-white font-bold">
-                        {completed == true ? "Completado: Sí" : completed === false ? "Completado: No" : "Selecciona Competado" }
-                    </Text>
-                </Pressable>
-                <View className="flex flex-row justify-between w-full">
-                    {["low", "medium", "high"].map((option) => (
-                        <Pressable key={option} onPress={() => setPriority(option)} className={`flex-1 items-center py-2 border rounded-lg mx-1 ${ priority === option ? "bg-black border-black" : "bg-gray-300 border-gray-400" }`}>
-                            <Text className={`text-lg ${ priority === option ? "text-white" : "text-black" }`}>
-                                {option === "high" ? "Alta" : option === "medium" ? "Media" : option === "low" ? "Baja" : ""}
-                            </Text>
-                        </Pressable>
-                    ))}
+                <View className="flex flex-col justify-between w-full">
+                    <Text className="text-xl font-bold">Terminada:</Text>
+                    <View className="flex-row justify-center items-center">
+                        {["false", "inprogress", "true"].map((option) => (
+                            <Pressable key={option} onPress={() => setCompleted(option)} className={`flex-1 items-center py-2 border rounded-lg mx-1 ${ completed === option ? "bg-black border-black" : "bg-gray-300 border-gray-400" }`}>
+                                <Text className={`text-lg ${ completed === option ? "text-white" : "text-black" }`}>
+                                    { option === "true" ? "Si" : option === "inprogress" ? "En Proceso" : "No" }
+                                </Text>
+                            </Pressable>
+                        ))}
+                    </View>
+                </View>
+                <View className="flex flex-col justify-between w-full">
+                    <Text className="text-xl font-bold">Prioridad:</Text>
+                    <View className="flex-row justify-center items-center">
+                        {["low", "medium", "high"].map((option) => (
+                            <Pressable key={option} onPress={() => setPriority(option)} className={`flex-1 items-center py-2 border rounded-lg mx-1 ${ priority === option ? "bg-black border-black" : "bg-gray-300 border-gray-400" }`}>
+                                <Text className={`text-lg ${ priority === option ? "text-white" : "text-black" }`}>
+                                    {option === "high" ? "Alta" : option === "medium" ? "Media" : option === "low" ? "Baja" : ""}
+                                </Text>
+                            </Pressable>
+                        ))}
+                    </View>
                 </View>
                 <TextInput type="description"  multiline={true} numberOfLines={10} value={description} onChangeText={setDescription} placeholder="Ingrese la Descripción.." className="border-2 border-black rounded-lg pl-2 shdaow-black shadow-sm text-black w-full h-1/4" />
             </View>
