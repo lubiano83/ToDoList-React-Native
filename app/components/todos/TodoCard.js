@@ -8,7 +8,6 @@ import moment from "moment";
 export default function TodoCard({ item }) {
 
     const { capitalize } = useCapitalize();
-    console.log("item:", item)
 
     return (
         <Link href={`/views/todos/detail/${item._id}`} className="border-2 mb-4 border-white rounded-xl p-2 flex justify-between items-center bg-black shadow-black shadow-sm">

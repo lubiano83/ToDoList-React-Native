@@ -7,6 +7,7 @@ import GoBack from "../GoBack";
 import TeamImage from "../TeamImage";
 
 export default function ProfileData() {
+    
     const { capitalize, capitalizeEachWord } = useCapitalize();
     const { user } = useAuth();
 
@@ -43,24 +44,40 @@ export default function ProfileData() {
                                 <Text className="text-black font-bold text-lg">Modificado:</Text>
                                 <Text className="text-black text-lg">{user.updatedAt}</Text>
                             </View>
-                            { user.team.length > 0 ?
+                            { user.company.companyName ? 
+                                <View>
+                                    <View className="flex-row gap-1">
+                                        <Text className="text-black font-bold text-lg">Lider:</Text>
+                                        <Link href="/">
+                                            <Text className="text-black text-lg">{capitalizeEachWord(user.company.companyName)}</Text>
+                                        </Link>
+                                    </View>
+                                    { user.team.length > 1 ?
+                                        <View className="flex-row gap-1">
+                                            <Text className="text-black font-bold text-lg">Equipo:</Text>
+                                            <View className="flex flex-row gap-2 flex-wrap">
+                                                {user.company.team.map((item, index) => (
+                                                    item.id === user.id ? "" :
+                                                    <Link href="/">
+                                                        <TeamImage key={index} image={item.image} />
+                                                    </Link>
+                                                ))}
+                                            </View>
+                                        </View>
+                                    : "" }
+                                </View>
+                            :
                                 <View className="flex-row gap-1">
                                     <Text className="text-black font-bold text-lg">Equipo:</Text>
                                     <View className="flex flex-row gap-2 flex-wrap">
-                                        {user.team.map((item, index) => (
-                                            <TeamImage key={index} image={item.image} />
+                                        {user.team.map((item) => (
+                                            <Link href="/">
+                                                <TeamImage key={item.id} image={item.image} />
+                                            </Link>
                                         ))}
                                     </View>
                                 </View>
-                            : "" }
-                            { user.company.companyName ? 
-                                <View className="flex-row gap-1">
-                                    <Text className="text-black font-bold text-lg">Lider:</Text>
-                                    <Link href="/">
-                                        <Text className="text-black text-lg">{capitalizeEachWord(user.company.companyName)}</Text>
-                                    </Link>
-                                </View>
-                            : "" }
+                            }
                         </View>
                     </View>
                 ) : (

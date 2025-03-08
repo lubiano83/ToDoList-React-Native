@@ -135,7 +135,7 @@ export const AuthProvider = ({ children }) => {
                 setFirst_name("");
                 setLast_name("");
                 setImage("");
-                router.push("/views/auth/profile/about");
+                router.push("/views/users/profile/about");
             } else {
                 alert("Hubo un error al actualizar los datos");
             }
@@ -159,7 +159,6 @@ export const AuthProvider = ({ children }) => {
                 aspect: [1, 1],
                 quality: 1,
             });
-            console.log("Resultado del picker:", result);
             if (!result.canceled) {
                 console.log("Imagen seleccionada:", result.assets[0].uri);
                 setImage(result.assets[0].uri);
